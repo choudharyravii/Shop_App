@@ -28,8 +28,8 @@ class Meal {
   final bool isVegetarian;
 
   const Meal({
-   required this.id,
-   required this.categories,
+    required this.id,
+    required this.categories,
     required this.title,
     required this.imageUrl,
     required this.ingredients,
