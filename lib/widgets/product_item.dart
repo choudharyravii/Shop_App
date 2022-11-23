@@ -35,14 +35,14 @@ class ProductItem extends StatelessWidget {
           backgroundColor: Colors.black87,
           leading: Consumer<Product>(
             builder: (ctx, product, _) => IconButton(
-                  icon: Icon(
-                    product.isFavorite ? Icons.favorite : Icons.favorite_border,
-                  ),
-                  color: Theme.of(context).colorScheme.secondary,
-                  onPressed: () {
-                    product.toggleFavoriteStatus();
-                  },
-                ),
+              icon: Icon(
+                product.isFavorite ? Icons.favorite : Icons.favorite_border,
+              ),
+              color: Theme.of(context).accentColor,
+              onPressed: () {
+                product.toggleFavoriteStatus();
+              },
+            ),
           ),
           title: Text(
             product.title,
@@ -54,23 +54,21 @@ class ProductItem extends StatelessWidget {
             ),
             onPressed: () {
               cart.addItem(product.id, product.price, product.title);
-              // Scaffold.of(context).hideCurrentSnackBar();
-              // Scaffold.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    'Added item to cart!',
-                  ),
-                  duration: Duration(seconds: 2),
-                  action: SnackBarAction(
-                    label: 'UNDO',
-                    onPressed: () {
-                      cart.removeSingleItem(product.id);
-                    },
-                  ),
-                
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+              final snackBar = SnackBar(
+                content: const Text('Added SnakBar Item',
+                    textAlign: TextAlign.center),
+                action: SnackBarAction(
+                  label: 'Undo',
+                  onPressed: () {
+                    // Some code to undo the change.
+                    cart.removeSingleItem(product.id);
+                  },
+                ),
               );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).accentColor,
           ),
         ),
       ),
