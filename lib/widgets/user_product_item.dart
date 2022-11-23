@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/providers/product.dart';
-import 'package:flutter_complete_guide/screens/edit_product_screen.dart';
+import 'package:provider/provider.dart';
+
+import '../screens/edit_product_screen.dart';
+import '../providers/products.dart';
 
 class UserProductItem extends StatelessWidget {
-  Product item;
+  final String id;
+  final String title;
+  final String imageUrl;
 
-  UserProductItem({
-    required this.item,
-  });
+  UserProductItem(this.id, this.title, this.imageUrl);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(item.title),
+      title: Text(title),
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(item.imageUrl),
+        backgroundImage: NetworkImage(imageUrl),
       ),
       trailing: Container(
         width: 100,
@@ -23,17 +25,23 @@ class UserProductItem extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.edit),
               onPressed: () {
-                Navigator.of(
-                  context,
-                ).pushNamed(
-                  EditScreenProduct.routeName,
-                );
+                // Navigator.of(context)
+                //     .pushNamed(EditProductScreen(Productid: id));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditProductScreen(
+                        Productid: id,
+                      ),
+                    ));
               },
               color: Theme.of(context).primaryColor,
             ),
             IconButton(
               icon: Icon(Icons.delete),
-              onPressed: () {},
+              onPressed: () {
+                Provider.of<Products>(context, listen: false).deleteProduct(id);
+              },
               color: Theme.of(context).errorColor,
             ),
           ],

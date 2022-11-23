@@ -10,7 +10,6 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           AppBar(
-            // toolbarHeight: 200,
             title: Text('Hello Friend!'),
             automaticallyImplyLeading: false,
           ),
