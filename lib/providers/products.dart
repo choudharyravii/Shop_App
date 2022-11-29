@@ -68,7 +68,7 @@ class Products with ChangeNotifier {
 
   Future<void> fetchAndSetProducts() async {
     final url =
-        Uri.https('logup-a8317-default-rtdb.firebaseio.com', 'products.json');
+        Uri.https('https://auth-test-61727-default-rtdb.firebaseio.com/', 'products.json');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -92,7 +92,7 @@ class Products with ChangeNotifier {
 
   Future<void> addProduct(Product product) async {
     final url =
-        Uri.https('logup-a8317-default-rtdb.firebaseio.com', 'products.json');
+        Uri.https('https://auth-test-61727-default-rtdb.firebaseio.com/', 'products.json');
     try {
       final response = await http.post(
         url,
@@ -125,7 +125,7 @@ class Products with ChangeNotifier {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {
       final url = Uri.https(
-          'logup-a8317-default-rtdb.firebaseio.com', 'products/$id.json');
+          'https://auth-test-61727-default-rtdb.firebaseio.com/', 'products/$id.json');
       http.patch(url,
           body: json.encode({
             'id': id,
@@ -145,7 +145,7 @@ class Products with ChangeNotifier {
   void deleteProduct(String id) {
     _items.removeWhere((prod) => prod.id == id);
     final url = Uri.https(
-        'logup-a8317-default-rtdb.firebaseio.com', 'products/$id.json');
+        'https://auth-test-61727-default-rtdb.firebaseio.com/', 'products/$id.json');
     http.delete(url);
     notifyListeners();
   }

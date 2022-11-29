@@ -22,7 +22,7 @@ class Product with ChangeNotifier {
   void toggleFavoriteStatus() {
     isFavorite = !isFavorite;
     final url = Uri.https(
-        'logup-a8317-default-rtdb.firebaseio.com', 'products/$id.json');
+        'https://auth-test-61727-default-rtdb.firebaseio.com/', 'products/$id.json');
     http.patch(url, body: json.encode({'isFavourite': isFavorite}));
     notifyListeners();
   }
